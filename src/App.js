@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import AllQuotes from "./pages/AllQuotes";
+import QuotesDetails from "./pages/QuoteDetails";
+import NewQuotes from "./pages/NewQuote";
+import Layout from "./components/layout/Layout";
+import NotFound from "./pages/Not-Found";
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Switch>
+        <Route path="/quotes" exact>
+          <AllQuotes />
+        </Route>
+        <Route path="/quotes/:quoteId">
+          <QuotesDetails />
+        </Route>
+        <Route path="/new-quotes">
+          <NewQuotes />
+        </Route>
+        <Route path="/">
+          <AllQuotes />
+        </Route>
+        <Route path="*">
+          <NotFound />
+        </Route>
+      </Switch>
+    </Layout>
   );
-}
+};
 
 export default App;
